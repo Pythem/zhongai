@@ -312,7 +312,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>🏀 小钟老师</h1>
+            <h1>🏀 小钟教练</h1>
             <p class="subtitle">体前变向换手运球专项训练</p>
         </header>
         
@@ -340,7 +340,7 @@
                 </div>
                 
                 <div class="input-group">
-                    <h3>小钟老师指导</h3>
+                    <h3>小钟教练指导</h3>
                     <p>描述一下你在练习中遇到的困难或想要改进的地方：</p>
                     <textarea id="rhythm-input" rows="4" placeholder="例如：我总是掌握不好变向的时机，球经常打到脚上..."></textarea>
                     <button onclick="getRhythmAdvice()">获取个性化建议</button>
@@ -348,11 +348,11 @@
                 
                 <div class="loading" id="rhythm-loading">
                     <div class="loader"></div>
-                    <p>小钟老师思考中...</p>
+                    <p>小钟教练思考中...</p>
                 </div>
                 
                 <div class="ai-response" id="rhythm-response">
-                    <h3>🤖 小钟老师反馈：</h3>
+                    <h3>🤖 小钟教练反馈：</h3>
                     <p id="rhythm-feedback"></p>
                 </div>
             </div>
@@ -377,11 +377,11 @@
                 
                 <div class="loading" id="maze-loading">
                     <div class="loader"></div>
-                    <p>小钟老师分析中...</p>
+                    <p>小钟教练分析中...</p>
                 </div>
                 
                 <div class="ai-response" id="maze-response">
-                    <h3>🤖 小钟老师分析：</h3>
+                    <h3>🤖 小钟教练分析：</h3>
                     <p id="maze-feedback"></p>
                 </div>
                 
@@ -428,11 +428,11 @@
                 
                 <div class="loading" id="tactics-loading">
                     <div class="loader"></div>
-                    <p>小钟老师分析中...</p>
+                    <p>小钟教练分析中...</p>
                 </div>
                 
                 <div class="ai-response" id="tactics-response">
-                    <h3>🤖 小钟老师分析：</h3>
+                    <h3>🤖 小钟教练分析：</h3>
                     <p id="tactics-feedback"></p>
                 </div>
             </div>
@@ -460,18 +460,18 @@
                 
                 <div class="loading" id="team-loading">
                     <div class="loader"></div>
-                    <p>小钟老师分析中...</p>
+                    <p>小钟教练分析中...</p>
                 </div>
                 
                 <div class="ai-response" id="team-response">
-                    <h3>🤖 小钟老师评价：</h3>
+                    <h3>🤖 小钟教练评价：</h3>
                     <p id="team-feedback"></p>
                 </div>
             </div>
         </div>
         
         <footer>
-            <p>© 2025 小钟老师 - 仅供教学测试使用</p>
+            <p>© 2025 小钟教练 - 仅供教学测试使用</p>
         </footer>
     </div>
 
@@ -808,7 +808,7 @@
             } catch (error) {
                 console.error('Error:', error);
                 // 模拟AI响应
-                const fallbackResponse = "小钟老师现在有点忙，晚点再给你回复吧 :)";
+                const fallbackResponse = "小钟教练现在有点忙，晚点再给你回复吧 :)";
                 showResponse('maze-response', fallbackResponse);
             } finally {
                 hideLoading('maze-loading');
@@ -876,7 +876,7 @@
             } catch (error) {
                 console.error('Error:', error);
                 // 模拟AI响应
-                const fallbackResponse = "小钟老师现在有点忙，晚点再给你回复吧 :)";
+                const fallbackResponse = "小钟教练现在有点忙，晚点再给你回复吧 :)";
                 showResponse('rhythm-response', fallbackResponse);
             } finally {
                 hideLoading('rhythm-loading');
@@ -945,7 +945,7 @@
             } catch (error) {
                 console.error('Error:', error);
                 // 模拟AI响应
-                const fallbackResponse = "小钟老师现在有点忙，晚点再给你回复吧 :)";
+                const fallbackResponse = "小钟教练现在有点忙，晚点再给你回复吧 :)";
                 showResponse('tactics-response', fallbackResponse);
             } finally {
                 hideLoading('tactics-loading');
@@ -1020,7 +1020,7 @@
             } catch (error) {
                 console.error('Error:', error);
                 // 模拟AI响应
-                const fallbackResponse = "小钟老师现在有点忙，晚点再给你回复吧 :)";
+                const fallbackResponse = "小钟教练现在有点忙，晚点再给你回复吧 :)";
                 showResponse('team-response', fallbackResponse);
             } finally {
                 hideLoading('team-loading');
