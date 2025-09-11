@@ -836,6 +836,7 @@
         </footer>
     </div>
 
+
     <script>
         // 全局变量
         let mazeRecords = JSON.parse(localStorage.getItem('mazeRecords')) || [];
@@ -1421,66 +1422,96 @@
                 videoContainer.style.display = 'none';
             }
         }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
+
         // 动态生成趋势图
         function generateChart() {
-            // 获取表格数据
+            // 获取表格中的数据
+            const dates = [];
             const times = [];
             const knocks = [];
-            const rows = document.querySelectorAll("#progress-table tbody tr");
 
-            rows.forEach(row => {
-                const time = row.querySelector(".progress-time").value;
-                const knock = row.querySelector(".progress-knocks").value;
-                if (time && knock) {
-                    times.push(time);
-                    knocks.push(knock);
-                }
+            const progressRows = document.querySelectorAll('#progress-records tbody tr');
+            progressRows.forEach(row => {
+                const date = row.cells[0].textContent;
+                const time = row.cells[1].textContent;
+                const knock = row.cells[2].textContent;
+
+                // 填充数据
+                dates.push(date);
+                times.push(parseFloat(time));
+                knocks.push(parseInt(knock));
             });
 
-            // 创建趋势图
+            // 获取画布元素
             const ctx = document.getElementById('progress-chart').getContext('2d');
-            new Chart(ctx, {
+
+            // 检查并销毁已有图表
+            if (window.progressChart) {
+                window.progressChart.destroy();
+            }
+
+            // 创建折线图
+            window.progressChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['练习1', '练习2', '练习3'], // 根据表格行数动态生成标签
+                    labels: dates, // X轴为日期
                     datasets: [
                         {
                             label: '完成时间 (秒)',
                             data: times,
-                            borderColor: 'rgba(52, 152, 219, 1)',
+                            borderColor: 'rgba(52, 152, 219, 1)', // 蓝色
                             backgroundColor: 'rgba(52, 152, 219, 0.2)',
-                            fill: true
+                            fill: true,
+                            tension: 0.3 // 曲线平滑
                         },
                         {
                             label: '碰倒次数',
                             data: knocks,
-                            borderColor: 'rgba(231, 76, 60, 1)',
+                            borderColor: 'rgba(231, 76, 60, 1)', // 红色
                             backgroundColor: 'rgba(231, 76, 60, 0.2)',
-                            fill: true
+                            fill: true,
+                            tension: 0.3 // 曲线平滑
                         }
                     ]
                 },
                 options: {
-                    responsive: true,
+                    responsive: true, // 自适应
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '数值'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: '日期'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '进步趋势图'
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
                         }
                     }
                 }
             });
         }
-    </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
+
+
         let progressRecords = JSON.parse(localStorage.getItem('progressRecords')) || [];
 
         // 渲染记录表格
         function renderRecords() {
+
             const tbody = document.querySelector('#progress-records tbody');
             tbody.innerHTML = '';
             progressRecords.forEach((record, index) => {
@@ -1489,7 +1520,7 @@
                 <td>${record.date}</td>
                 <td>${record.time}</td>
                 <td>${record.knocks}</td>
-                <td><button onclick="deleteRecord(${index})">删除</button></td>
+                <td><button onclick="deleteRecord(this)">删除</button></td>
             `;
                 tbody.appendChild(row);
             });
@@ -1501,56 +1532,6 @@
             row.remove();
         }
 
-        // 生成进度折线图
-        function generateChart() {
-            const progressData = [];
-            const dates = [];
-            const times = [];
-            const knocks = [];
-
-            const progressRows = document.querySelectorAll('#progress-records tbody tr');
-            progressRows.forEach(row => {
-                const date = row.cells[0].textContent;
-                const time = row.cells[1].textContent;
-                const knock = row.cells[2].textContent;
-
-                dates.push(date);
-                times.push(time);
-                knocks.push(knock);
-            });
-
-            const ctx = document.getElementById('progress-chart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: dates,
-                    datasets: [
-                        {
-                            label: '完成时间 (秒)',
-                            data: times,
-                            borderColor: 'rgba(52, 152, 219, 1)',
-                            backgroundColor: 'rgba(52, 152, 219, 0.2)',
-                            fill: true
-                        },
-                        {
-                            label: '碰倒次数',
-                            data: knocks,
-                            borderColor: 'rgba(231, 76, 60, 1)',
-                            backgroundColor: 'rgba(231, 76, 60, 0.2)',
-                            fill: true
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        }
 
         // 添加新的记录
         function addRecord() {
@@ -1589,21 +1570,30 @@
                     level3: document.getElementById('level-3-stars').value,
                     level4: document.getElementById('level-4-stars').value,
                 },
-                progress: [],
             };
 
+            progressRecords = [];
             const progressRows = document.querySelectorAll('#progress-records tbody tr');
             progressRows.forEach(row => {
                 const date = row.cells[0].textContent;
                 const time = row.cells[1].textContent;
                 const knocks = row.cells[2].textContent;
-                studentInfo.progress.push({ date, time, knocks });
+                progressRecords.push({ date, time, knocks });
             });
 
             // 保存到 localStorage
             localStorage.setItem('personalProfile', JSON.stringify(studentInfo));
+            localStorage.setItem('progressRecords', JSON.stringify(progressRecords));
             alert('个人档案已保存！');
         }
+
+
+
+        // 页面加载时渲染表格和图表
+        document.addEventListener('DOMContentLoaded', function () {
+            renderRecords();
+            generateChart();
+        });
 
         // 页面加载时，读取本地存储的档案
         window.onload = function () {
@@ -1619,30 +1609,8 @@
                 document.getElementById('level-2-stars').value = savedProfile.stars.level2 || '1';
                 document.getElementById('level-3-stars').value = savedProfile.stars.level3 || '1';
                 document.getElementById('level-4-stars').value = savedProfile.stars.level4 || '1';
-
-                // 填充进度记录
-                const progressTable = document.getElementById('progress-records').querySelector('tbody');
-                savedProfile.progress.forEach(record => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                    <td>${record.date}</td>
-                    <td>${record.time}</td>
-                    <td>${record.knocks}</td>
-                    <td><button onclick="deleteRecord(this)">删除</button></td>
-                `;
-                    progressTable.appendChild(row);
-                });
-
-                // 生成图表
-                generateChart();
             }
         };
-
-        // 页面加载时渲染表格和图表
-        document.addEventListener('DOMContentLoaded', function () {
-            renderRecords();
-            generateChart();
-        });
     </script>
 </body>
 
