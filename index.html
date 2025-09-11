@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,14 +14,14 @@
             --dark: #2c3e50;
             --light: #ecf0f1;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Microsoft YaHei', sans-serif;
         }
-        
+
         body {
             background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
             color: #333;
@@ -28,7 +29,7 @@
             min-height: 100vh;
             padding: 20px;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -37,30 +38,30 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             overflow: hidden;
         }
-        
+
         header {
             background: var(--dark);
             color: white;
             padding: 20px;
             text-align: center;
         }
-        
+
         h1 {
             font-size: 2.2rem;
             margin-bottom: 10px;
         }
-        
+
         .subtitle {
             font-size: 1.1rem;
             opacity: 0.9;
         }
-        
+
         .tabs {
             display: flex;
             background: var(--primary);
             overflow-x: auto;
         }
-        
+
         .tab {
             padding: 15px 25px;
             color: white;
@@ -69,45 +70,50 @@
             transition: background 0.3s;
             white-space: nowrap;
         }
-        
+
         .tab.active {
             background: var(--secondary);
         }
-        
+
         .tab:hover {
             background: #2980b9;
         }
-        
+
         .content {
             padding: 25px;
         }
-        
+
         .section {
             display: none;
         }
-        
+
         .section.active {
             display: block;
             animation: fadeIn 0.5s;
         }
-        
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
-        
+
         h2 {
             color: var(--primary);
             margin-bottom: 15px;
             border-left: 5px solid var(--accent);
             padding-left: 10px;
         }
-        
+
         h3 {
             color: var(--secondary);
             margin: 15px 0 10px;
         }
-        
+
         .task-card {
             background: #f8f9fa;
             border-radius: 10px;
@@ -115,12 +121,14 @@
             margin-bottom: 20px;
             border-left: 4px solid var(--accent);
         }
-        
+
         .input-group {
             margin: 20px 0;
         }
-        
-        textarea, input[type="text"], input[type="number"] {
+
+        textarea,
+        input[type="text"],
+        input[type="number"] {
             width: 100%;
             padding: 12px;
             border: 2px solid #ddd;
@@ -129,12 +137,14 @@
             margin-bottom: 10px;
             resize: vertical;
         }
-        
-        textarea:focus, input[type="text"]:focus, input[type="number"]:focus {
+
+        textarea:focus,
+        input[type="text"]:focus,
+        input[type="number"]:focus {
             border-color: var(--primary);
             outline: none;
         }
-        
+
         button {
             background: var(--accent);
             color: white;
@@ -148,19 +158,19 @@
             margin-right: 10px;
             margin-bottom: 10px;
         }
-        
+
         button:hover {
             background: #27ae60;
         }
-        
+
         button.secondary {
             background: var(--primary);
         }
-        
+
         button.secondary:hover {
             background: #2980b9;
         }
-        
+
         .ai-response {
             margin-top: 20px;
             padding: 15px;
@@ -169,13 +179,13 @@
             border-left: 4px solid var(--primary);
             display: none;
         }
-        
+
         .loading {
             display: none;
             text-align: center;
             margin: 20px 0;
         }
-        
+
         .loader {
             border: 5px solid #f3f3f3;
             border-top: 5px solid var(--primary);
@@ -185,12 +195,17 @@
             animation: spin 1s linear infinite;
             margin: 0 auto;
         }
-        
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
-        
+
         .warning {
             background: #fff3cd;
             color: #856404;
@@ -199,89 +214,91 @@
             margin: 20px 0;
             border-left: 4px solid #ffc107;
         }
-        
+
         .api-key-container {
             margin: 20px 0;
             padding: 15px;
             background: #f8f9fa;
             border-radius: 8px;
-            display: none; /* 隐藏API密钥容器 */
+            display: none;
+            /* 隐藏API密钥容器 */
         }
-        
+
         .data-table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
-        
-        .data-table th, .data-table td {
+
+        .data-table th,
+        .data-table td {
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
-        
+
         .data-table th {
             background-color: var(--primary);
             color: white;
         }
-        
+
         .data-table tr:nth-child(even) {
             background-color: #f8f9fa;
         }
-        
+
         .data-table tr:hover {
             background-color: #e8f4fc;
         }
-        
+
         .chart-container {
             position: relative;
             height: 300px;
             margin: 30px 0;
         }
-        
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             margin: 20px 0;
         }
-        
+
         .stat-card {
             background: white;
             border-radius: 10px;
             padding: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-        
+
         .stat-value {
             font-size: 2rem;
             font-weight: bold;
             color: var(--primary);
             margin: 10px 0;
         }
-        
+
         .stat-label {
             color: #666;
             font-size: 0.9rem;
         }
-        
+
         .improvement {
             color: var(--accent);
         }
-        
+
         .regression {
             color: var(--secondary);
         }
-        
+
         .video-container {
             margin: 20px 0;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .video-placeholder {
             background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
             height: 200px;
@@ -292,7 +309,7 @@
             font-size: 1.2rem;
             font-weight: bold;
         }
-        
+
         .team-evaluation {
             background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
             border-radius: 12px;
@@ -300,7 +317,7 @@
             margin: 20px 0;
             border-left: 5px solid #e17055;
         }
-        
+
         footer {
             text-align: center;
             padding: 20px;
@@ -309,75 +326,78 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header>
             <h1>🏀 小钟教练</h1>
             <p class="subtitle">体前变向换手运球专项训练</p>
         </header>
-        
+
         <div class="api-key-container">
             <h3>API密钥设置</h3>
-            <input type="text" id="api-key" placeholder="请输入您的DeepSeek API密钥" value="sk-cd4ff9b678f4482ea26db31f325f8389">
+            <input type="text" id="api-key" placeholder="请输入您的DeepSeek API密钥"
+                value="sk-cd4ff9b678f4482ea26db31f325f8389">
             <p class="warning">注意：仅用于本地测试，请勿在前端代码中暴露API密钥</p>
         </div>
-        
+
         <div class="tabs">
             <div class="tab active" onclick="switchTab(0)">第一关：节奏训练</div>
             <div class="tab" onclick="switchTab(1)">第二关：迷宫穿越</div>
             <div class="tab" onclick="switchTab(2)">第三关：实战挑战</div>
             <div class="tab" onclick="switchTab(3)">第四关：团队协作</div>
+            <div class="tab" onclick="switchTab(4)">评价与反馈</div>
         </div>
-        
+
         <div class="content">
             <div class="section active">
                 <h2>第一关：节奏训练·基础定型</h2>
-                
+
                 <div class="task-card">
                     <h3>实践任务</h3>
                     <p>1. 选择节奏感强的音乐，在重拍处完成体前变向徒手模仿动作</p>
                     <p>2. 按"1-2-变！"口令节奏完成原地变向运球，挑战连续20次不掉球</p>
-                
-<!--                     <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=48965051&bvid=BV1hb411M7av&cid=85753908&p=1&high_quality=1&danmaku=0&autoplay=false" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe> -->
-<!--                     <iframe src="https://github.com/Pythem/zhongai/blob/main/1.mp4"  type="video/mp4" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe> -->
-                        <video controls  style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
-                          <source src="./1.mp4" type="video/mp4">
-                          你的浏览器不支持视频播放。
-                        </video>
+
+                    <!--                     <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=48965051&bvid=BV1hb411M7av&cid=85753908&p=1&high_quality=1&danmaku=0&autoplay=false" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe> -->
+                    <!--                     <iframe src="https://github.com/Pythem/zhongai/blob/main/1.mp4"  type="video/mp4" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe> -->
+                    <video controls style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+                        <source src="./1.mp4" type="video/mp4">
+                        你的浏览器不支持视频播放。
+                    </video>
                 </div>
-                
+
                 <div class="input-group">
                     <h3>小钟教练指导</h3>
                     <p>描述一下你在练习中遇到的困难或想要改进的地方：</p>
                     <textarea id="rhythm-input" rows="4" placeholder="例如：我总是掌握不好变向的时机，球经常打到脚上..."></textarea>
                     <button onclick="getRhythmAdvice()">获取个性化建议</button>
                 </div>
-                
+
                 <div class="loading" id="rhythm-loading">
                     <div class="loader"></div>
                     <p>小钟教练思考中...</p>
                 </div>
-                
+
                 <div class="ai-response" id="rhythm-response">
                     <h3>🤖 小钟教练反馈：</h3>
                     <p id="rhythm-feedback"></p>
                 </div>
             </div>
-            
+
             <div class="section">
                 <h2>第二关：迷宫穿越·空间控制</h2>
-                
+
                 <div class="task-card">
                     <h3>实践任务</h3>
                     <p>1. 用6个障碍物布置"之"字形迷宫，测量并记录间距</p>
                     <p>2. 运球穿越迷宫，在每个拐角使用变向技术，记录完成时间和碰倒次数</p>
-<!--                     <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=710249489&bvid=BV1CQ4y1K7Qh&cid=174272674&p=1&high_quality=1&danmaku=0&autoplay=false" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe> -->
-                 <video controls style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
-                          <source src="./2.mp4" type="video/mp4">
-                          你的浏览器不支持视频播放。
-                        </video>
+                    <!--                     <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=710249489&bvid=BV1CQ4y1K7Qh&cid=174272674&p=1&high_quality=1&danmaku=0&autoplay=false" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe> -->
+                    <video controls style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+                        <source src="./2.mp4" type="video/mp4">
+                        你的浏览器不支持视频播放。
+                    </video>
                 </div>
-                
+
                 <div class="input-group">
                     <h3>迷宫数据记录</h3>
                     <input type="number" id="maze-distance" placeholder="迷宫间距（步数）" min="1">
@@ -386,17 +406,17 @@
                     <button onclick="saveMazeRecord()">保存记录</button>
                     <button onclick="analyzeMazeData()" class="secondary">AI分析数据</button>
                 </div>
-                
+
                 <div class="loading" id="maze-loading">
                     <div class="loader"></div>
                     <p>小钟教练分析中...</p>
                 </div>
-                
+
                 <div class="ai-response" id="maze-response">
                     <h3>🤖 小钟教练分析：</h3>
                     <p id="maze-feedback"></p>
                 </div>
-                
+
                 <h3>历史记录</h3>
                 <table class="data-table" id="maze-records">
                     <thead>
@@ -412,88 +432,208 @@
                         <!-- 记录将通过JavaScript动态添加 -->
                     </tbody>
                 </table>
-                
+
                 <div class="stats-grid" id="maze-stats">
                     <!-- 统计信息将通过JavaScript动态添加 -->
                 </div>
-                
+
                 <div class="chart-container">
                     <canvas id="maze-chart"></canvas>
                 </div>
             </div>
-            
+
             <div class="section">
- 	  	 <div class="warning">
-  	     	 	<strong>安全提示：</strong>在进行对抗练习时，务必确保有足够的空间并避免过度碰撞。建议与合适的伙伴进行练习，以降低受伤风险！
-  		  </div>
+                <div class="warning">
+                    <strong>安全提示：</strong>在进行对抗练习时，务必确保有足够的空间并避免过度碰撞。建议与合适的伙伴进行练习，以降低受伤风险！
+                </div>
                 <h2>第三关：实战挑战·对抗应用</h2>
-                
+
                 <div class="task-card">
                     <h3>实践任务</h3>
                     <p>1. 与伙伴进行模拟对抗，在防守压力下运用变向技术突破</p>
                     <p>2. 用1-2句话描述成功突破的策略和方法</p>
-<!--                     <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=113361987572967&bvid=BV1nGy6YAERE&cid=26442138107&p=1&high_quality=1&danmaku=0&autoplay=false" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe> -->
-                 <video controls style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
-                          <source src="./3.mp4" type="video/mp4">
-                          你的浏览器不支持视频播放。
-                        </video>
+                    <!--                     <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=113361987572967&bvid=BV1nGy6YAERE&cid=26442138107&p=1&high_quality=1&danmaku=0&autoplay=false" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe> -->
+                    <video controls style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+                        <source src="./3.mp4" type="video/mp4">
+                        你的浏览器不支持视频播放。
+                    </video>
                 </div>
-                
+
                 <div class="input-group">
                     <h3>策略分析</h3>
                     <p>描述你的突破策略和遇到的问题：</p>
                     <textarea id="tactics-input" rows="4" placeholder="例如：我先假装往右突破，然后快速变向到左边，但球总是控制不好..."></textarea>
                     <button onclick="analyzeTactics()">获取策略分析</button>
                 </div>
-                
+
                 <div class="loading" id="tactics-loading">
                     <div class="loader"></div>
                     <p>小钟教练分析中...</p>
                 </div>
-                
+
                 <div class="ai-response" id="tactics-response">
                     <h3>🤖 小钟教练分析：</h3>
                     <p id="tactics-feedback"></p>
                 </div>
             </div>
-            
+
             <div class="section">
                 <h2>第四关：团队协作·综合展示</h2>
-                
+
                 <div class="task-card">
                     <h3>实践任务</h3>
                     <p>1. 与3-4名同学设计包含变向技术的连贯动作或游戏</p>
                     <p>2. 录制30秒展示视频，小组共同观看并讨论改进方案</p>
-                     <video controls style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
-                          <source src="./4.mp4" type="video/mp4">
-                          你的浏览器不支持视频播放。
-                        </video>
+                    <video controls style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+                        <source src="./4.mp4" type="video/mp4">
+                        你的浏览器不支持视频播放。
+                    </video>
                 </div>
-                
+
                 <div class="input-group">
                     <h3>创意和协作评析</h3>
                     <!-- <input type="text" id="team-video-link" placeholder="输入视频链接（Bilibili等）"> -->
                     <textarea id="team-description" rows="3" placeholder="描述你们团队的创意和协作过程"></textarea>
                     <button onclick="submitTeamWork()">获取个性化建议</button>
                 </div>
-                
+
                 <!-- <div id="video-container" style="margin: 20px 0; display: none;">
                     <h3>🎬 团队视频展示</h3>
                     <div id="video-player" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px;"></div>
                 </div> -->
-                
+
                 <div class="loading" id="team-loading">
                     <div class="loader"></div>
                     <p>小钟教练分析中...</p>
                 </div>
-                
+
                 <div class="ai-response" id="team-response">
                     <h3>🤖 小钟教练评价：</h3>
                     <p id="team-feedback"></p>
                 </div>
             </div>
+            <div class="section">
+                <h2>评价与反馈</h2>
+
+                <div class="task-card">
+                    <h3>自评与师评/家长评</h3>
+                    <p>根据以下维度进行自评，并请师长或家长进行评价：</p>
+
+                    <!-- 评价说明 -->
+                    <div class="task-card">
+                        <h4>评价说明</h4>
+                        <p>请根据下列维度进行自评并请师长或家长评定：</p>
+                        <ul>
+                            <li><strong>运动能力</strong>：评估学生在完成运动任务时的协调性和动作流畅度。</li>
+                            <li><strong>健康行为</strong>：评估学生在练习时的主动性、积极性和是否保持良好的运动习惯。</li>
+                            <li><strong>体育品德</strong>：评估学生的团队合作精神、是否能够与他人配合完成任务。</li>
+                            <li><strong>跨学科应用</strong>：评估学生能否将篮球训练中的技巧与其他学科知识结合，是否具有创新思维。</li>
+                        </ul>
+                        <p>每个维度的评分标准如下：</p>
+                        <ul>
+                            <li>★：需要努力，表现较弱。</li>
+                            <li>★★：一般，表现有待提高。</li>
+                            <li>★★★：良好，表现较好。</li>
+                            <li>★★★★：优秀，表现出色，完全符合要求。</li>
+                        </ul>
+                        <p><strong>操作方式：</strong>请在“自评”列中选择你认为自己的表现等级，然后请师长或家长根据同样的标准在“师评/家长评”列中进行评价。</p>
+                    </div>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>评价维度</th>
+                                <th>自评</th>
+                                <th>师评/家长评</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>运动能力</td>
+                                <td>
+                                    <select>
+                                        <option>★</option>
+                                        <option>★★</option>
+                                        <option>★★★</option>
+                                        <option>★★★★</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select>
+                                        <option>★</option>
+                                        <option>★★</option>
+                                        <option>★★★</option>
+                                        <option>★★★★</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>健康行为</td>
+                                <td>
+                                    <select>
+                                        <option>★</option>
+                                        <option>★★</option>
+                                        <option>★★★</option>
+                                        <option>★★★★</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select>
+                                        <option>★</option>
+                                        <option>★★</option>
+                                        <option>★★★</option>
+                                        <option>★★★★</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>体育品德</td>
+                                <td>
+                                    <select>
+                                        <option>★</option>
+                                        <option>★★</option>
+                                        <option>★★★</option>
+                                        <option>★★★★</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select>
+                                        <option>★</option>
+                                        <option>★★</option>
+                                        <option>★★★</option>
+                                        <option>★★★★</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>跨学科应用</td>
+                                <td>
+                                    <select>
+                                        <option>★</option>
+                                        <option>★★</option>
+                                        <option>★★★</option>
+                                        <option>★★★★</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select>
+                                        <option>★</option>
+                                        <option>★★</option>
+                                        <option>★★★</option>
+                                        <option>★★★★</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p><strong>评价说明：</strong><br>
+                        ★需努力、★★一般、★★★良好、★★★★优秀</p>
+                </div>
+            </div>
+
         </div>
-        
+
         <footer>
             <p>© 2025 小钟教练 - 仅供教学测试使用</p>
         </footer>
@@ -503,40 +643,40 @@
         // 全局变量
         let mazeRecords = JSON.parse(localStorage.getItem('mazeRecords')) || [];
         let mazeChart = null;
-        
+
         // 页面加载时初始化
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             renderMazeRecords();
             updateMazeChart();
             calculateMazeStats();
         });
-        
+
         // 切换标签页
         function switchTab(index) {
             document.querySelectorAll('.tab').forEach((tab, i) => {
                 tab.classList.toggle('active', i === index);
             });
-            
+
             document.querySelectorAll('.section').forEach((section, i) => {
                 section.classList.toggle('active', i === index);
             });
-            
+
             // 如果切换到第二关，更新图表
             if (index === 1) {
                 setTimeout(updateMazeChart, 100);
             }
         }
-        
+
         // 显示加载状态
         function showLoading(id) {
             document.getElementById(id).style.display = 'block';
         }
-        
+
         // 隐藏加载状态
         function hideLoading(id) {
             document.getElementById(id).style.display = 'none';
         }
-        
+
         // 显示AI响应
         function showResponse(id, content) {
             const responseElem = document.getElementById(id);
@@ -544,18 +684,18 @@
             feedbackElem.innerHTML = content;
             responseElem.style.display = 'block';
         }
-        
+
         // 保存迷宫记录
         function saveMazeRecord() {
             const distance = document.getElementById('maze-distance').value;
             const time = document.getElementById('maze-time').value;
             const knocks = document.getElementById('maze-knocks').value;
-            
+
             if (!distance || !time || knocks === '') {
                 alert('请填写所有字段');
                 return;
             }
-            
+
             const record = {
                 id: Date.now(),
                 date: new Date().toLocaleDateString(),
@@ -563,44 +703,44 @@
                 time: parseFloat(time),
                 knocks: parseInt(knocks)
             };
-            
+
             mazeRecords.push(record);
             localStorage.setItem('mazeRecords', JSON.stringify(mazeRecords));
-            
+
             // 清空输入框
             document.getElementById('maze-distance').value = '';
             document.getElementById('maze-time').value = '';
             document.getElementById('maze-knocks').value = '';
-            
+
             // 更新界面
             renderMazeRecords();
             updateMazeChart();
             calculateMazeStats();
-            
+
             alert('记录已保存！');
         }
-        
+
         // 删除迷宫记录
         function deleteMazeRecord(id) {
             mazeRecords = mazeRecords.filter(record => record.id !== id);
             localStorage.setItem('mazeRecords', JSON.stringify(mazeRecords));
-            
+
             // 更新界面
             renderMazeRecords();
             updateMazeChart();
             calculateMazeStats();
         }
-        
+
         // 渲染迷宫记录表格
         function renderMazeRecords() {
             const tbody = document.querySelector('#maze-records tbody');
             tbody.innerHTML = '';
-            
+
             if (mazeRecords.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">暂无记录</td></tr>';
                 return;
             }
-            
+
             mazeRecords.forEach(record => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -615,37 +755,37 @@
                 tbody.appendChild(row);
             });
         }
-        
+
         // 计算迷宫数据统计
         function calculateMazeStats() {
             const statsContainer = document.getElementById('maze-stats');
             statsContainer.innerHTML = '';
-            
+
             if (mazeRecords.length === 0) {
                 return;
             }
-            
+
             // 计算平均时间
             const avgTime = mazeRecords.reduce((sum, record) => sum + record.time, 0) / mazeRecords.length;
-            
+
             // 计算平均碰倒次数
             const avgKnocks = mazeRecords.reduce((sum, record) => sum + record.knocks, 0) / mazeRecords.length;
-            
+
             // 计算最佳时间
             const bestTime = Math.min(...mazeRecords.map(record => record.time));
-            
+
             // 计算进步情况（与上一次比较）
             let timeImprovement = 0;
             let knocksImprovement = 0;
-            
+
             if (mazeRecords.length > 1) {
                 const lastRecord = mazeRecords[mazeRecords.length - 1];
                 const prevRecord = mazeRecords[mazeRecords.length - 2];
-                
+
                 timeImprovement = prevRecord.time - lastRecord.time;
                 knocksImprovement = prevRecord.knocks - lastRecord.knocks;
             }
-            
+
             // 创建统计卡片
             statsContainer.innerHTML = `
                 <div class="stat-card">
@@ -674,25 +814,25 @@
                 </div>
             `;
         }
-        
+
         // 更新迷宫图表
         function updateMazeChart() {
             const ctx = document.getElementById('maze-chart').getContext('2d');
-            
+
             // 如果已有图表，先销毁
             if (mazeChart) {
                 mazeChart.destroy();
             }
-            
+
             if (mazeRecords.length === 0) {
                 return;
             }
-            
+
             // 准备图表数据
             const labels = mazeRecords.map(record => record.date);
             const timeData = mazeRecords.map(record => record.time);
             const knocksData = mazeRecords.map(record => record.knocks);
-            
+
             // 创建新图表
             mazeChart = new Chart(ctx, {
                 type: 'line',
@@ -750,35 +890,35 @@
                 }
             });
         }
-        
+
         // 分析迷宫数据
         async function analyzeMazeData() {
             const apiKey = document.getElementById('api-key').value;
-            
+
             if (!apiKey) {
                 alert('请输入DeepSeek API密钥');
                 return;
             }
-            
+
             if (mazeRecords.length === 0) {
                 alert('请先保存至少一条记录');
                 return;
             }
-            
+
             showLoading('maze-loading');
-            
+
             // 准备分析数据
             const latestRecord = mazeRecords[mazeRecords.length - 1];
             let comparisonText = '';
-            
+
             if (mazeRecords.length > 1) {
                 const prevRecord = mazeRecords[mazeRecords.length - 2];
                 const timeDiff = (prevRecord.time - latestRecord.time).toFixed(1);
                 const knocksDiff = prevRecord.knocks - latestRecord.knocks;
-                
+
                 comparisonText = `与上一次记录相比，完成时间${timeDiff >= 0 ? '减少了' : '增加了'}${Math.abs(timeDiff)}秒，碰倒次数${knocksDiff >= 0 ? '减少了' : '增加了'}${Math.abs(knocksDiff)}次。`;
             }
-            
+
             // 构建提示词
             const prompt = `你是一名专业的篮球教练，正在分析学生的"迷宫穿越"训练数据。
             
@@ -801,7 +941,7 @@
             6. 回答长度在200字左右
             
             请用中文回答，语气亲切专业。`;
-            
+
             try {
                 // 直接调用DeepSeek API
                 const response = await fetch('https://api.deepseek.com/chat/completions', {
@@ -820,14 +960,14 @@
                         max_tokens: 500
                     })
                 });
-                
+
                 if (!response.ok) {
                     throw new Error(`API请求失败: ${response.status}`);
                 }
-                
+
                 const data = await response.json();
                 const aiResponse = data.choices[0].message.content;
-                
+
                 showResponse('maze-response', aiResponse);
             } catch (error) {
                 console.error('Error:', error);
@@ -838,24 +978,24 @@
                 hideLoading('maze-loading');
             }
         }
-        
+
         // 获取节奏训练建议
         async function getRhythmAdvice() {
             const userInput = document.getElementById('rhythm-input').value;
             const apiKey = document.getElementById('api-key').value;
-            
+
             if (!userInput) {
                 alert('请描述你在练习中遇到的问题');
                 return;
             }
-            
+
             if (!apiKey) {
                 alert('请输入DeepSeek API密钥');
                 return;
             }
-            
+
             showLoading('rhythm-loading');
-            
+
             // 构建提示词
             const prompt = `你是一名专业的篮球教练，专门指导小学生篮球技术。现在你需要针对"体前变向换手运球"的节奏训练提供指导。
             
@@ -869,7 +1009,7 @@
             5. 回答长度在150字左右
             
             请用中文回答，语气亲切专业。`;
-            
+
             try {
                 // 直接调用DeepSeek API
                 const response = await fetch('https://api.deepseek.com/chat/completions', {
@@ -888,14 +1028,14 @@
                         max_tokens: 500
                     })
                 });
-                
+
                 if (!response.ok) {
                     throw new Error(`API请求失败: ${response.status}`);
                 }
-                
+
                 const data = await response.json();
                 const aiResponse = data.choices[0].message.content;
-                
+
                 showResponse('rhythm-response', aiResponse);
             } catch (error) {
                 console.error('Error:', error);
@@ -906,24 +1046,24 @@
                 hideLoading('rhythm-loading');
             }
         }
-        
+
         // 分析战术策略
         async function analyzeTactics() {
             const userInput = document.getElementById('tactics-input').value;
             const apiKey = document.getElementById('api-key').value;
-            
+
             if (!userInput) {
                 alert('请描述你的突破策略和遇到的问题');
                 return;
             }
-            
+
             if (!apiKey) {
                 alert('请输入DeepSeek API密钥');
                 return;
             }
-            
+
             showLoading('tactics-loading');
-            
+
             // 构建提示词
             const prompt = `你是一名专业的篮球教练，正在指导小学生学习"体前变向换手运球"的实战应用。
             
@@ -938,7 +1078,7 @@
             6. 回答长度在150字左右
             
             请用中文回答，语气亲切专业。`;
-            
+
             try {
                 // 直接调用DeepSeek API
                 const response = await fetch('https://api.deepseek.com/chat/completions', {
@@ -957,14 +1097,14 @@
                         max_tokens: 500
                     })
                 });
-                
+
                 if (!response.ok) {
                     throw new Error(`API请求失败: ${response.status}`);
                 }
-                
+
                 const data = await response.json();
                 const aiResponse = data.choices[0].message.content;
-                
+
                 showResponse('tactics-response', aiResponse);
             } catch (error) {
                 console.error('Error:', error);
@@ -975,30 +1115,30 @@
                 hideLoading('tactics-loading');
             }
         }
-        
+
         // 提交团队作品
         async function submitTeamWork() {
             // const videoLink = document.getElementById('team-video-link').value;
             const description = document.getElementById('team-description').value;
             const apiKey = document.getElementById('api-key').value;
-            
+
             if (!description) {
                 alert('请描述团队的创意和协作过程');
                 return;
             }
-            
+
             if (!apiKey) {
                 alert('请输入DeepSeek API密钥');
                 return;
             }
-            
+
             showLoading('team-loading');
-            
+
             // 如果有视频链接，尝试嵌入视频
             // if (videoLink) {
             //     embedVideo(videoLink);
             // }
-            
+
             // 构建提示词
             const prompt = `你是一名专业的篮球教练，正在评估学生团队的"体前变向换手运球"协作的团队的创意和写作过程。
             
@@ -1013,7 +1153,7 @@
             6. 回答长度在200字左右
             
             请用中文回答，语气亲切专业。`;
-            
+
             try {
                 // 直接调用DeepSeek API
                 const response = await fetch('https://api.deepseek.com/chat/completions', {
@@ -1032,14 +1172,14 @@
                         max_tokens: 600
                     })
                 });
-                
+
                 if (!response.ok) {
                     throw new Error(`API请求失败: ${response.status}`);
                 }
-                
+
                 const data = await response.json();
                 const aiResponse = data.choices[0].message.content;
-                
+
                 showResponse('team-response', aiResponse);
             } catch (error) {
                 console.error('Error:', error);
@@ -1050,18 +1190,18 @@
                 hideLoading('team-loading');
             }
         }
-        
+
         // 嵌入视频
         function embedVideo(videoLink) {
             const videoContainer = document.getElementById('video-container');
             const videoPlayer = document.getElementById('video-player');
-            
+
             // 清空之前的视频
             videoPlayer.innerHTML = '';
-            
+
             // 检查视频平台并生成嵌入代码
             let embedCode = '';
-            
+
             if (videoLink.includes('youtube.com') || videoLink.includes('youtu.be')) {
                 // YouTube视频
                 const videoId = videoLink.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
@@ -1075,7 +1215,7 @@
                     embedCode = `<iframe width="100%" height="100%" src="//player.bilibili.com/player.html?bvid=${bvidMatch[1]}&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>`;
                 }
             }
-            
+
             if (embedCode) {
                 videoPlayer.innerHTML = embedCode;
                 videoContainer.style.display = 'block';
@@ -1086,4 +1226,5 @@
         }
     </script>
 </body>
+
 </html>
