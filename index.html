@@ -347,6 +347,7 @@
             <div class="tab" onclick="switchTab(2)">第三关：实战挑战</div>
             <div class="tab" onclick="switchTab(3)">第四关：团队协作</div>
             <div class="tab" onclick="switchTab(4)">评价与反馈</div>
+            <div class="tab" onclick="switchTab(5)">个人成长档案</div>
         </div>
 
         <div class="content">
@@ -512,6 +513,7 @@
                     <p id="team-feedback"></p>
                 </div>
             </div>
+
             <div class="section">
                 <h2>评价与反馈</h2>
 
@@ -630,6 +632,200 @@
                     <p><strong>评价说明：</strong><br>
                         ★需努力、★★一般、★★★良好、★★★★优秀</p>
                 </div>
+            </div>
+
+            <div class="section">
+                <h2>个人成长档案</h2>
+
+                <!-- 个人信息 -->
+                <div class="task-card">
+                    <h3>学生信息</h3>
+                    <p style="display: flex; align-items: center;">
+                        <strong style="margin-right: 10px;">姓名：</strong> <input type="text" id="student-name"
+                            placeholder="请输入姓名" style="width: 150px; margin-right: 20px;">
+                        <strong style="margin-right: 10px;">班级：</strong> <input type="text" id="student-class"
+                            placeholder="请输入班级" style="width: 150px; margin-right: 20px;">
+                        <strong style="margin-right: 10px;">学期：</strong> <input type="text" id="student-term"
+                            placeholder="请输入学期" style="width: 150px;">
+                    </p>
+                </div>
+
+
+                <!-- 我的闯关星级榜 -->
+                <div class="task-card">
+                    <h3>1. 我的闯关星级榜</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>关卡</th>
+                                <th>目标</th>
+                                <th>我的星级 (1-5星)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>第一关：节奏训练</strong></td>
+                                <td>动作连贯，节奏稳定</td>
+                                <td>
+                                    <select id="level-1-stars">
+                                        <option value="1">1星</option>
+                                        <option value="2">2星</option>
+                                        <option value="3">3星</option>
+                                        <option value="4">4星</option>
+                                        <option value="5">5星</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>第二关：迷宫穿越</strong></td>
+                                <td>控制稳定，碰倒少</td>
+                                <td>
+                                    <select id="level-2-stars">
+                                        <option value="1">1星</option>
+                                        <option value="2">2星</option>
+                                        <option value="3">3星</option>
+                                        <option value="4">4星</option>
+                                        <option value="5">5星</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>第三关：实战挑战</strong></td>
+                                <td>成功突破，策略佳</td>
+                                <td>
+                                    <select id="level-3-stars">
+                                        <option value="1">1星</option>
+                                        <option value="2">2星</option>
+                                        <option value="3">3星</option>
+                                        <option value="4">4星</option>
+                                        <option value="5">5星</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>第四关：团队协作</strong></td>
+                                <td>积极合作，有创意</td>
+                                <td>
+                                    <select id="level-4-stars">
+                                        <option value="1">1星</option>
+                                        <option value="2">2星</option>
+                                        <option value="3">3星</option>
+                                        <option value="4">4星</option>
+                                        <option value="5">5星</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><strong>涂星说明：</strong>1星代表“需改进”，5星代表“表现优秀”。</p>
+                </div>
+
+                <!-- 我的进步看得见 -->
+                <div class="task-card">
+                    <h3>2. 我的进步看得见 (迷宫挑战)</h3>
+
+                    <!-- 输入部分 -->
+                    <div class="input-group"
+                        style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                        <label for="progress-date" style="margin-right: 10px;">练习日期：</label>
+                        <input type="date" id="progress-date" style="flex: 1; max-width: 150px;">
+
+                        <label for="progress-time" style="margin-right: 10px;">完成时间 (秒)：</label>
+                        <input type="number" id="progress-time" placeholder="请输入时间" style="flex: 1; max-width: 150px;">
+
+                        <label for="progress-knocks" style="margin-right: 10px;">碰倒次数 (次)：</label>
+                        <input type="number" id="progress-knocks" placeholder="请输入次数"
+                            style="flex: 1; max-width: 150px;">
+
+                        <button onclick="addRecord()">添加记录</button>
+                    </div>
+
+                    <!-- 记录展示表格 -->
+                    <h4>练习记录</h4>
+                    <table class="data-table" id="progress-records">
+                        <thead>
+                            <tr>
+                                <th>练习日期</th>
+                                <th>完成时间 (秒)</th>
+                                <th>碰倒次数 (次)</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 记录通过 JavaScript 动态添加 -->
+                        </tbody>
+                    </table>
+
+                    <!-- 折线图部分 -->
+                    <h4>进步趋势图：</h4>
+                    <div class="chart-container">
+                        <canvas id="progress-chart"></canvas>
+                    </div>
+                    <button onclick="generateChart()">生成趋势图</button>
+                </div>
+
+
+                <!-- 教练点评 -->
+                <div class="task-card">
+                    <h3>3. 教练对我说 & 我的收获</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>关卡</th>
+                                <th>小钟教练的“金句”</th>
+                                <th>我的最大收获 (一句话)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>一</strong></td>
+                                <td><input type="text" id="quote-1" placeholder="请输入教练金句"></td>
+                                <td><input type="text" id="gain-1" placeholder="请输入收获"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>二</strong></td>
+                                <td><input type="text" id="quote-2" placeholder="请输入教练金句"></td>
+                                <td><input type="text" id="gain-2" placeholder="请输入收获"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>三</strong></td>
+                                <td><input type="text" id="quote-3" placeholder="请输入教练金句"></td>
+                                <td><input type="text" id="gain-3" placeholder="请输入收获"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>四</strong></td>
+                                <td><input type="text" id="quote-4" placeholder="请输入教练金句"></td>
+                                <td><input type="text" id="gain-4" placeholder="请输入收获"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 期末总评 -->
+                <div class="task-card">
+                    <h3>4. 期末总评</h3>
+
+                    <p><strong>我给自己打星：</strong>
+                        <input type="radio" name="self-evaluation" value="1星"> 1星
+                        <input type="radio" name="self-evaluation" value="2星"> 2星
+                        <input type="radio" name="self-evaluation" value="3星"> 3星
+                        <input type="radio" name="self-evaluation" value="4星"> 4星
+                        <input type="radio" name="self-evaluation" value="5星"> 5星
+                    </p>
+
+                    <p><strong>老师评语：</strong><br>
+                        <textarea placeholder="请输入老师评语" rows="4" style="width: 100%;"></textarea>
+                    </p>
+
+                    <p><strong>老师签名：</strong>
+                        <input type="text" id="teacher-signature" placeholder="请输入教师签名" style="width: 200px;">
+                    </p>
+
+                    <p><strong>日期：</strong>
+                        <input type="date" id="evaluation-date" style="width: 200px;">
+                    </p>
+                </div>
+
             </div>
 
         </div>
@@ -1224,6 +1420,159 @@
                 videoContainer.style.display = 'none';
             }
         }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // 动态生成趋势图
+        function generateChart() {
+            // 获取表格数据
+            const times = [];
+            const knocks = [];
+            const rows = document.querySelectorAll("#progress-table tbody tr");
+
+            rows.forEach(row => {
+                const time = row.querySelector(".progress-time").value;
+                const knock = row.querySelector(".progress-knocks").value;
+                if (time && knock) {
+                    times.push(time);
+                    knocks.push(knock);
+                }
+            });
+
+            // 创建趋势图
+            const ctx = document.getElementById('progress-chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['练习1', '练习2', '练习3'], // 根据表格行数动态生成标签
+                    datasets: [
+                        {
+                            label: '完成时间 (秒)',
+                            data: times,
+                            borderColor: 'rgba(52, 152, 219, 1)',
+                            backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                            fill: true
+                        },
+                        {
+                            label: '碰倒次数',
+                            data: knocks,
+                            borderColor: 'rgba(231, 76, 60, 1)',
+                            backgroundColor: 'rgba(231, 76, 60, 0.2)',
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let progressRecords = JSON.parse(localStorage.getItem('progressRecords')) || [];
+
+        // 渲染记录表格
+        function renderRecords() {
+            const tbody = document.querySelector('#progress-records tbody');
+            tbody.innerHTML = '';
+            progressRecords.forEach((record, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td>${record.date}</td>
+                <td>${record.time}</td>
+                <td>${record.knocks}</td>
+                <td><button onclick="deleteRecord(${index})">删除</button></td>
+            `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // 删除记录
+        function deleteRecord(index) {
+            progressRecords.splice(index, 1);
+            localStorage.setItem('progressRecords', JSON.stringify(progressRecords));
+            renderRecords();
+            generateChart();
+        }
+
+        // 添加新的记录
+        function addRecord() {
+            const date = document.getElementById('progress-date').value;
+            const time = document.getElementById('progress-time').value;
+            const knocks = document.getElementById('progress-knocks').value;
+
+            if (!date || !time || !knocks) {
+                alert("请填写完整的记录！");
+                return;
+            }
+
+            const newRecord = { date, time, knocks };
+            progressRecords.push(newRecord);
+            localStorage.setItem('progressRecords', JSON.stringify(progressRecords));
+            renderRecords();
+            generateChart();
+
+            // 清空输入框
+            document.getElementById('progress-date').value = '';
+            document.getElementById('progress-time').value = '';
+            document.getElementById('progress-knocks').value = '';
+        }
+
+        // 生成折线图
+        function generateChart() {
+            const ctx = document.getElementById('progress-chart').getContext('2d');
+            const dates = progressRecords.map(record => record.date);
+            const times = progressRecords.map(record => record.time);
+            const knocks = progressRecords.map(record => record.knocks);
+
+            if (window.progressChart) {
+                window.progressChart.destroy(); // 如果已经存在图表，销毁它
+            }
+
+            window.progressChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [
+                        {
+                            label: '完成时间 (秒)',
+                            data: times,
+                            borderColor: 'rgba(52, 152, 219, 1)',
+                            backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                            fill: true
+                        },
+                        {
+                            label: '碰倒次数',
+                            data: knocks,
+                            borderColor: 'rgba(231, 76, 60, 1)',
+                            backgroundColor: 'rgba(231, 76, 60, 0.2)',
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // 页面加载时渲染表格和图表
+        document.addEventListener('DOMContentLoaded', function () {
+            renderRecords();
+            generateChart();
+        });
     </script>
 </body>
 
