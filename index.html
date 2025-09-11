@@ -483,7 +483,7 @@
 
                 <div class="task-card">
                     <h3>实践任务</h3>
-                    <p>1. 与3-4名同学设计包含变向技术的连贯动作或游戏</p>
+                    <p>1. 与3-4名同学设计包含变向技术的游戏或比赛</p>
                     <p>2. 录制30秒展示视频，小组共同观看并讨论改进方案</p>
                     <video controls style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
                         <source src="./4.mp4" type="video/mp4">
@@ -637,7 +637,7 @@
             <div class="section">
                 <h2>个人成长档案</h2>
 
-                <!-- 个人信息 -->
+                <!-- 个人成长档案 -->
                 <div class="task-card">
                     <h3>学生信息</h3>
                     <p style="display: flex; align-items: center;">
@@ -801,9 +801,9 @@
                     </table>
                 </div>
 
-                <!-- 期末总评 -->
+                <!-- 单元总评 -->
                 <div class="task-card">
-                    <h3>4. 期末总评</h3>
+                    <h3>4. 单元总评</h3>
 
                     <p><strong>我给自己打星：</strong>
                         <input type="radio" name="self-evaluation" value="1星"> 1星
@@ -827,7 +827,8 @@
                 </div>
 
             </div>
-
+            <!-- 保存按钮 -->
+            <button onclick="savePersonalProfile()">保存个人档案</button>
         </div>
 
         <footer>
@@ -1495,48 +1496,31 @@
         }
 
         // 删除记录
-        function deleteRecord(index) {
-            progressRecords.splice(index, 1);
-            localStorage.setItem('progressRecords', JSON.stringify(progressRecords));
-            renderRecords();
-            generateChart();
+        function deleteRecord(button) {
+            const row = button.closest('tr');
+            row.remove();
         }
 
-        // 添加新的记录
-        function addRecord() {
-            const date = document.getElementById('progress-date').value;
-            const time = document.getElementById('progress-time').value;
-            const knocks = document.getElementById('progress-knocks').value;
-
-            if (!date || !time || !knocks) {
-                alert("请填写完整的记录！");
-                return;
-            }
-
-            const newRecord = { date, time, knocks };
-            progressRecords.push(newRecord);
-            localStorage.setItem('progressRecords', JSON.stringify(progressRecords));
-            renderRecords();
-            generateChart();
-
-            // 清空输入框
-            document.getElementById('progress-date').value = '';
-            document.getElementById('progress-time').value = '';
-            document.getElementById('progress-knocks').value = '';
-        }
-
-        // 生成折线图
+        // 生成进度折线图
         function generateChart() {
+            const progressData = [];
+            const dates = [];
+            const times = [];
+            const knocks = [];
+
+            const progressRows = document.querySelectorAll('#progress-records tbody tr');
+            progressRows.forEach(row => {
+                const date = row.cells[0].textContent;
+                const time = row.cells[1].textContent;
+                const knock = row.cells[2].textContent;
+
+                dates.push(date);
+                times.push(time);
+                knocks.push(knock);
+            });
+
             const ctx = document.getElementById('progress-chart').getContext('2d');
-            const dates = progressRecords.map(record => record.date);
-            const times = progressRecords.map(record => record.time);
-            const knocks = progressRecords.map(record => record.knocks);
-
-            if (window.progressChart) {
-                window.progressChart.destroy(); // 如果已经存在图表，销毁它
-            }
-
-            window.progressChart = new Chart(ctx, {
+            new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: dates,
@@ -1567,6 +1551,92 @@
                 }
             });
         }
+
+        // 添加新的记录
+        function addRecord() {
+            const date = document.getElementById('progress-date').value;
+            const time = document.getElementById('progress-time').value;
+            const knocks = document.getElementById('progress-knocks').value;
+
+            if (!date || !time || !knocks) {
+                alert("请填写完整的记录！");
+                return;
+            }
+
+            const newRecord = { date, time, knocks };
+            progressRecords.push(newRecord);
+            localStorage.setItem('progressRecords', JSON.stringify(progressRecords));
+            renderRecords();
+            generateChart();
+
+            // 清空输入框
+            document.getElementById('progress-date').value = '';
+            document.getElementById('progress-time').value = '';
+            document.getElementById('progress-knocks').value = '';
+        }
+
+
+
+        // 保存个人档案到 localStorage
+        function savePersonalProfile() {
+            const studentInfo = {
+                name: document.getElementById('student-name').value,
+                class: document.getElementById('student-class').value,
+                term: document.getElementById('student-term').value,
+                stars: {
+                    level1: document.getElementById('level-1-stars').value,
+                    level2: document.getElementById('level-2-stars').value,
+                    level3: document.getElementById('level-3-stars').value,
+                    level4: document.getElementById('level-4-stars').value,
+                },
+                progress: [],
+            };
+
+            const progressRows = document.querySelectorAll('#progress-records tbody tr');
+            progressRows.forEach(row => {
+                const date = row.cells[0].textContent;
+                const time = row.cells[1].textContent;
+                const knocks = row.cells[2].textContent;
+                studentInfo.progress.push({ date, time, knocks });
+            });
+
+            // 保存到 localStorage
+            localStorage.setItem('personalProfile', JSON.stringify(studentInfo));
+            alert('个人档案已保存！');
+        }
+
+        // 页面加载时，读取本地存储的档案
+        window.onload = function () {
+            const savedProfile = JSON.parse(localStorage.getItem('personalProfile'));
+
+            if (savedProfile) {
+                document.getElementById('student-name').value = savedProfile.name || '';
+                document.getElementById('student-class').value = savedProfile.class || '';
+                document.getElementById('student-term').value = savedProfile.term || '';
+
+                // 填充星级
+                document.getElementById('level-1-stars').value = savedProfile.stars.level1 || '1';
+                document.getElementById('level-2-stars').value = savedProfile.stars.level2 || '1';
+                document.getElementById('level-3-stars').value = savedProfile.stars.level3 || '1';
+                document.getElementById('level-4-stars').value = savedProfile.stars.level4 || '1';
+
+                // 填充进度记录
+                const progressTable = document.getElementById('progress-records').querySelector('tbody');
+                savedProfile.progress.forEach(record => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                    <td>${record.date}</td>
+                    <td>${record.time}</td>
+                    <td>${record.knocks}</td>
+                    <td><button onclick="deleteRecord(this)">删除</button></td>
+                `;
+                    progressTable.appendChild(row);
+                });
+
+                // 生成图表
+                generateChart();
+            }
+        };
 
         // 页面加载时渲染表格和图表
         document.addEventListener('DOMContentLoaded', function () {
